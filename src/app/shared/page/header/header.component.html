@@ -1,0 +1,12 @@
+<nav class="px-4 md:px-36 py-4 fixed top-0 left-0 right-0 flex bg-white shadow-sm">
+  <a [routerLink]="['']" class="me-auto">
+    <img src="assets/image/logo-text.svg" class="h-10" />
+  </a>
+  <button
+    class="h-10 rounded px-8 py-2 hover:bg-red-600 focus-within:bg-red-600 text-gray-800 hover:text-white focus-within:text-white me-2">
+    {{ 'translate_login' | translate }}
+  </button>
+  <button class="h-10 rounded px-8 py-2 bg-red-400 hover:bg-red-600 focus-within:bg-red-600 text-white">
+    {{ 'translate_start_now' | translate }}
+  </button>
+</nav>
