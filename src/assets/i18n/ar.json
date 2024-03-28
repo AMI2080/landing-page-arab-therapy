@@ -1,4 +1,10 @@
 {
   "translate_login": "تسجيل الدخول",
-  "translate_start_now": "ابدأ الآن"
+  "translate_start_now": "ابدأ الآن",
+  "translate_main_page": "الرئيسية",
+  "translate_about_us": "من نحن",
+  "translate_faq": "أسئلة شائعة",
+  "translate_privacy_policy": "سياسة الخصوصية",
+  "translate_terms_and_conditions": "الشروط و الأحكام",
+  "translate_contact_us": "تواصل معنا"
 }
