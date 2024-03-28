@@ -6,6 +6,7 @@ import { FooterComponent } from './page/footer/footer.component';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -16,6 +17,7 @@ const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     TranslateModule.forRoot({
       defaultLanguage: 'ar',
       useDefaultLang: true,
