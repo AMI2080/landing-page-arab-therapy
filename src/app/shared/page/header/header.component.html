@@ -1,12 +1,13 @@
-<nav class="px-4 md:px-36 py-4 fixed top-0 left-0 right-0 flex bg-white shadow-sm">
+<nav class="px-4 md:px-36 py-4 fixed z-10 top-0 left-0 right-0 flex bg-white shadow-sm">
   <a [routerLink]="['']" class="me-auto">
-    <img src="assets/image/logo-text.svg" class="h-10" />
+    <img src="assets/image/logo-text.svg" class="h-10 hidden md:inline-block" />
+    <img src="assets/image/logo-sm.png" class="h-10 md:hidden" />
   </a>
   <button
-    class="h-10 rounded px-8 py-2 hover:bg-red-600 focus-within:bg-red-600 text-gray-800 hover:text-white focus-within:text-white me-2">
+    class="h-10 rounded px-3 md:px-8 py-2 hover:bg-red-600 focus-within:bg-red-600 text-gray-800 hover:text-white focus-within:text-white me-2">
     {{ 'translate_login' | translate }}
   </button>
-  <button class="h-10 rounded px-8 py-2 bg-red-400 hover:bg-red-600 focus-within:bg-red-600 text-white">
+  <button class="h-10 rounded px-3 md:px-8 py-2 bg-red-400 hover:bg-red-600 focus-within:bg-red-600 text-white">
     {{ 'translate_start_now' | translate }}
   </button>
 </nav>
