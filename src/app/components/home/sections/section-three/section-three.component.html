@@ -1,0 +1,18 @@
+<section class="px-4 md:px-32 mb-28">
+  <h2 class="text-center text-gray-700 text-2xl font-bold mb-8">
+    {{ 'translate_arab_theraby_tests' | translate }}
+  </h2>
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+    @for (i of [].constructor(6); track $index) {
+    <a [routerLink]="['']"
+      class="mb-5 hover:[&_div]:shadow-lg hover:[&_img]:-rotate-3 hover:[&_img]:scale-110 [&_*]:duration-300">
+      <div class="h-52 overflow-hidden rounded-lg mb-6">
+        <img [src]="'assets/image/test' + ($index + 1) + '.png'" class="min-h-full min-w-full object-cover">
+      </div>
+      <h4 class="text-xl font-bold text-blue-700">
+        {{ 'translate_test_' + ($index + 1) + '_title' | translate }}
+      </h4>
+    </a>
+    }
+  </div>
+</section>
