@@ -64,7 +64,11 @@
     <h3 class="m-10 text-3xl font-bold text-center">
       {{ 'translate_request_demo_account_form_title' | translate }}
     </h3>
-    <form [formGroup]="requestDemoForm" class="text-start" (ngSubmit)="submitRequestDemoAccount()">
+    <form [formGroup]="requestDemoForm" class="relative text-start" (ngSubmit)="submitRequestDemoAccount()">
+      <div *ngIf="isSendingDemoRequest"
+          class="h-full w-full bg-black/10 rounded z-10 absolute flex items-center cursor-not-allowed">
+          <app-spinner class="block mx-auto h-fit"></app-spinner>
+      </div>
       <div
         class="grid grid-cols-2 gap-5 [&_label]:inline-block [&_label]:mb-2 [&_label]:text-xs md:[&_label]:text-sm  [&_label]:font-bold">
         <div>
@@ -168,7 +172,7 @@
         "{{ 'translate_request_demo_account_form_p' | translate }}"
       </p>
       <div class="text-end">
-        <button type="submit" [disabled]="requestDemoForm.invalid"
+        <button type="submit" [disabled]="requestDemoForm.invalid || isSendingDemoRequest"
           class="mb-4 bg-blue-900 hover:bg-blue-950 focus-within:bg-blue-950 text-white disabled:bg-blue-400 disabled:cursor-not-allowed rounded px-10 py-3">
           {{ 'translate_request_demo_account' | translate}}
         </button>

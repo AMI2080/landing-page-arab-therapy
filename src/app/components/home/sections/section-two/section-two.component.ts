@@ -37,6 +37,8 @@ export class HomeSectionTwoComponent {
     SearchCountryField.Name,
   ];
 
+  public isSendingDemoRequest: boolean = false;
+
   private formModal: typeof Swal;
 
   public comapnySizes: CompanySize[] = [
@@ -88,6 +90,7 @@ export class HomeSectionTwoComponent {
   public submitRequestDemoAccount(): void {
     this.requestDemoForm.markAllAsTouched();
     if (this.requestDemoForm.valid) {
+      this.isSendingDemoRequest = true;
       this.mainService
         .requestDemo({
           ...this.requestDemoForm.value,
@@ -109,6 +112,7 @@ export class HomeSectionTwoComponent {
               this.translateService.instant('translate_your_request_failed')
             );
           }
+          this.isSendingDemoRequest = false;
         });
     }
   }
