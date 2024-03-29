@@ -8,12 +8,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
+const sharedComponents = [PageComponent, HeaderComponent, FooterComponent, SpinnerComponent];
 
 @NgModule({
   imports: [
