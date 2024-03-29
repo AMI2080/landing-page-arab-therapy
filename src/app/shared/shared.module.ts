@@ -7,6 +7,7 @@ import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,6 +28,9 @@ const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
         deps: [HttpClient],
       },
     }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-left',
+    }),
   ],
   declarations: [
     // components
@@ -34,6 +38,7 @@ const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
   ],
   exports: [
     TranslateModule,
+    ToastrModule,
     // components
     ...sharedComponents,
   ],

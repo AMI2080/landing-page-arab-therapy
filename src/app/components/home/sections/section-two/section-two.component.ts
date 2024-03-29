@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
+import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 interface CompanySize {
@@ -35,6 +36,8 @@ export class HomeSectionTwoComponent {
     SearchCountryField.Name,
   ];
 
+  private formModal: typeof Swal;
+
   public comapnySizes: CompanySize[] = [
     {
       id: 1,
@@ -55,7 +58,10 @@ export class HomeSectionTwoComponent {
     },
   ];
 
-  public constructor(private translateService: TranslateService) {
+  public constructor(
+    private translateService: TranslateService,
+    private toastr: ToastrService
+  ) {
     this.requestDemoForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -67,12 +73,13 @@ export class HomeSectionTwoComponent {
 
   public showRequestDemoAccount(): void {
     if (this.requestDemoFormTemp) {
-      Swal.fire({
+      this.formModal = Swal.mixin({
         html: this.requestDemoFormTemp.nativeElement,
         width: '48rem',
         showCloseButton: true,
         showConfirmButton: false,
       });
+      this.formModal.fire();
     }
   }
 
@@ -83,6 +90,12 @@ export class HomeSectionTwoComponent {
         ...this.requestDemoForm.value,
         phone: this.requestDemoForm.get('phone')?.value.e164Number,
       });
+      this.requestDemoForm.reset();
+      this.formModal.close();
+      this.toastr.success(
+        'The data has been printed in console',
+        this.translateService.instant('translate_your_request_has_been_sent')
+      );
     }
   }
 }
