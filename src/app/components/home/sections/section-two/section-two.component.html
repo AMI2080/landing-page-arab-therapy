@@ -7,7 +7,8 @@
     <p class="font-medium mb-7">
       {{ 'translate_demo_account_sub_header' | translate }}
     </p>
-    <button class="bg-blue-900 hover:bg-blue-950 focus-within:bg-blue-950 text-white rounded px-10 py-3">
+    <button (click)="showRequestDemoAccount()"
+      class="bg-blue-900 hover:bg-blue-950 focus-within:bg-blue-950 text-white rounded px-10 py-3">
       {{ 'translate_request_demo_account' | translate}}
     </button>
   </div>
@@ -57,3 +58,121 @@
     </div>
   </div>
 </section>
+
+<div class="hidden">
+  <div #requestDemoFormTemp>
+    <h3 class="m-10 text-3xl font-bold text-center">
+      {{ 'translate_request_demo_account_form_title' | translate }}
+    </h3>
+    <form [formGroup]="requestDemoForm" class="text-start" (ngSubmit)="submitRequestDemoAccount()">
+      <div
+        class="grid grid-cols-2 gap-5 [&_label]:inline-block [&_label]:mb-2 [&_label]:text-xs md:[&_label]:text-sm  [&_label]:font-bold">
+        <div>
+          <label for="name">
+            {{ 'translate_name' | translate }}
+          </label>
+          <input type="text" id="name" formControlName="name" [placeholder]="'translate_enter_name' | translate"
+            class="rounded w-full py-2 px-3 outline-none border"
+            [ngClass]="requestDemoForm.get('name')?.touched && requestDemoForm.get('name')?.invalid ? 'border-red-600' : 'border-gray-300 hover:border-blue-700 focus-within:border-blue-700'">
+          <ng-container
+            *ngIf="requestDemoForm.get('name')?.touched && requestDemoForm.get('name')?.hasError('required')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_name_required' | translate }}
+            </small>
+          </ng-container>
+        </div>
+        <div>
+          <label for="email">
+            {{ 'translate_company_email' | translate }}
+          </label>
+          <input type="email" id="email" formControlName="email"
+            [placeholder]="'translate_enter_company_email' | translate"
+            class="rounded w-full py-2 px-3 outline-none border"
+            [ngClass]="requestDemoForm.get('email')?.touched && requestDemoForm.get('email')?.invalid ? 'border-red-600' : 'border-gray-300 hover:border-blue-700 focus-within:border-blue-700'">
+          <ng-container
+            *ngIf="requestDemoForm.get('email')?.touched && requestDemoForm.get('email')?.hasError('required')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_company_email_required' | translate }}
+            </small>
+          </ng-container>
+          <ng-container
+            *ngIf="requestDemoForm.get('email')?.touched && requestDemoForm.get('email')?.hasError('email')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_company_email_invalid' | translate }}
+            </small>
+          </ng-container>
+        </div>
+        <div>
+          <label for="phone">
+            {{ 'translate_phone' | translate }}
+          </label>
+          <div class="rtl:[&_.iti>div:first-child]:left-auto">
+            <ngx-intl-tel-input dir="rtl" class="w-full block [&_.iti]:w-full rtl:[&_.iti>div:first-child]:left-auto"
+              cssClass="phone-input w-full border-[1px] rounded py-2.5 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6 {{ requestDemoForm.get('phone')?.touched && requestDemoForm.get('phone')?.invalid ? 'border-red-600': 'border-gray-300 hover:border-blue-700 focus-within:border-blue-700'}}"
+              [preferredCountries]="preferredCountries" [customPlaceholder]="'translate_enter_phone' | translate"
+              [searchCountryFlag]="true" [searchCountryField]="searchCountryField"
+              [selectedCountryISO]="selectedCountryISO" [separateDialCode]="false" [maxLength]="15"
+              formControlName="phone" [inputId]="'phone'"></ngx-intl-tel-input>
+          </div>
+          <ng-container
+            *ngIf="requestDemoForm.get('phone')?.touched && requestDemoForm.get('phone')?.hasError('required')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_phone_required' | translate }}
+            </small>
+          </ng-container>
+          <ng-container
+            *ngIf="requestDemoForm.get('phone')?.touched && requestDemoForm.get('phone')?.hasError('validatePhoneNumber')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_phone_invalid' | translate }}
+            </small>
+          </ng-container>
+        </div>
+        <div>
+          <label for="company_name">
+            {{ 'translate_company_name' | translate }}
+          </label>
+          <input type="text" id="company_name" formControlName="companyName"
+            [placeholder]="'translate_enter_company_name' | translate"
+            class="rounded w-full py-2 px-3 outline-none border"
+            [ngClass]="requestDemoForm.get('companyName')?.touched && requestDemoForm.get('companyName')?.invalid ? 'border-red-600' : 'border-gray-300 hover:border-blue-700 focus-within:border-blue-700'">
+          <ng-container
+            *ngIf="requestDemoForm.get('companyName')?.touched && requestDemoForm.get('companyName')?.hasError('required')">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_company_name_required' | translate }}
+            </small>
+          </ng-container>
+        </div>
+        <div>
+          <label for="company_size">
+            {{ 'translate_company_size' | translate }}
+          </label>
+          <ng-select
+            [ngClass]="requestDemoForm.get('companySize')?.touched && requestDemoForm.get('companySize')?.hasError('required')
+              ? '[&_.ng-select-container]:border-red-600'
+              : '[&_.ng-select-container]:border-gray-300 [&_.ng-select-container]:hover:border-blue-700 [&:is(.ng-select-focused)>.ng-select-container]:border-blue-700 [&:is(.ng-select-focused:not(.ng-select-opened))>.ng-select-container]:border-blue-700'"
+            class="[&_.ng-select-container]:border-[1px]
+            [&:is(.ng-select.ng-select-single)_.ng-select-container]:h-[52px] [&_.ng-select-container]:hover:outline-none
+            [&:is(.ng-select-focused:not(.ng-select-opened))>.ng-select-container]:shadow-none"
+            [placeholder]="'translate_choose_company_size' | translate" bindValue="id" bindLabel="label"
+            id="company_size" formControlName="companySize" [items]="comapnySizes">
+          </ng-select>
+          <ng-container
+            *ngIf="requestDemoForm.get('companySize')?.touched && requestDemoForm.get('companySize')?.invalid">
+            <small class="text-red-600 text-sm">
+              {{ 'translate_company_size_required' | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <p class="my-12 text-gray-700 text-sm font-medium">
+        "{{ 'translate_request_demo_account_form_p' | translate }}"
+      </p>
+      <div class="text-end">
+        <button type="submit" [disabled]="requestDemoForm.invalid"
+          class="mb-4 bg-blue-900 hover:bg-blue-950 focus-within:bg-blue-950 text-white disabled:bg-blue-400 disabled:cursor-not-allowed rounded px-10 py-3">
+          {{ 'translate_request_demo_account' | translate}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

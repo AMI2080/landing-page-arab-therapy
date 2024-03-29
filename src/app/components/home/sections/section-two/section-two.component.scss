@@ -1,0 +1,26 @@
+[dir="rtl"] ::ng-deep {
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+    inset: unset !important;
+  }
+
+  .iti__arrow {
+    margin-inline-start: .5rem;
+  }
+
+  .iti__country {
+    text-align: start;
+  }
+
+  input {
+    direction: rtl;
+
+    &.phone-input {
+      font-size: 18px;
+      line-height: 18px;
+      padding-inline-start: 4rem;
+      padding-block: .5rem;
+    }
+  }
+}

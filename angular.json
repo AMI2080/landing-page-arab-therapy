@@ -57,6 +57,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "node_modules/@ng-select/ng-select/scss/default.theme.scss",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -121,6 +123,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "node_modules/@ng-select/ng-select/scss/default.theme.scss",
               "src/styles.scss"
             ],
             "scripts": []

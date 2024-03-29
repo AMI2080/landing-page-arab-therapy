@@ -13,6 +13,10 @@ import {
   HomeSectionThreeComponent,
   HomeSectionTwoComponent,
 } from './components/home/sections';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,8 +26,15 @@ import {
     HomeSectionTwoComponent,
     HomeSectionThreeComponent,
   ],
-  imports: [BrowserModule, SharedModule, AppRoutingModule],
-  providers: [provideClientHydration()],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    ReactiveFormsModule,
+    NgxIntlTelInputModule,
+    NgSelectModule,
+    AppRoutingModule,
+  ],
+  providers: [provideClientHydration(), provideAnimations()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
