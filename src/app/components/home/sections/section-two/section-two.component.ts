@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { MainService } from '../../../../core/services/main.service';
 
 interface CompanySize {
   id: number;
@@ -60,7 +61,8 @@ export class HomeSectionTwoComponent {
 
   public constructor(
     private translateService: TranslateService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private mainService: MainService
   ) {
     this.requestDemoForm = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -86,16 +88,28 @@ export class HomeSectionTwoComponent {
   public submitRequestDemoAccount(): void {
     this.requestDemoForm.markAllAsTouched();
     if (this.requestDemoForm.valid) {
-      console.log({
-        ...this.requestDemoForm.value,
-        phone: this.requestDemoForm.get('phone')?.value.e164Number,
-      });
-      this.requestDemoForm.reset();
-      this.formModal.close();
-      this.toastr.success(
-        'The data has been printed in console',
-        this.translateService.instant('translate_your_request_has_been_sent')
-      );
+      this.mainService
+        .requestDemo({
+          ...this.requestDemoForm.value,
+          phone: this.requestDemoForm.get('phone')?.value.e164Number,
+        })
+        .subscribe((response) => {
+          if (response.status === 100) {
+            this.requestDemoForm.reset();
+            this.formModal.close();
+            this.toastr.success(
+              response.message,
+              this.translateService.instant(
+                'translate_your_request_has_been_sent'
+              )
+            );
+          } else {
+            this.toastr.error(
+              response.message,
+              this.translateService.instant('translate_your_request_failed')
+            );
+          }
+        });
     }
   }
 }
